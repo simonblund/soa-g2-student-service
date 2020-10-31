@@ -8,3 +8,10 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-public class StudentController implements StudentResource {
+public class StudentController implements StudentResource{
 
-    @Override
     @GetMapping(UrlPaths.STUDENT_RESOURCE)
     @ExceptionHandler
     public ResponseEntity<StudentResponse> getStudent(@PathVariable("id") String studentId){
