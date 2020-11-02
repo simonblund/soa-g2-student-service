@@ -27,3 +27,4 @@ jobs:
       env:
         USERNAME: simonblund
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_RUN_NUMBER: ${{ GITHUB_RUN_NUMBER }}
