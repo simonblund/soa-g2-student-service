@@ -25,4 +25,5 @@ jobs:
     - name: Publish with Gradle
       run: ./gradlew publish
       env:
+        USERNAME: simonblund
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
