@@ -47,6 +47,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
+                version = "1.0"+project.findProperty("build-version") ?: System.getenv("GITHUB_RUN_NUMBER")
                 url = uri("https://maven.pkg.github.com/simonblund/soa-g2-student-service")
                 credentials {
                     username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
