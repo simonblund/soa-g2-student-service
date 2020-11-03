@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public interface StudentResource {
     @RequestMapping(method = RequestMethod.GET, path = UrlPaths.STUDENT_RESOURCE)
-    ResponseEntity<StudentResponse> getStudent(@PathVariable String studentId);
+    ResponseEntity<StudentResponse> getStudent(@PathVariable long studentId);
 }

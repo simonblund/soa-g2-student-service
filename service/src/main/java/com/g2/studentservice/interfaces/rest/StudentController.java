@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class StudentController implements StudentResource{
 
+    @Override
     @GetMapping(UrlPaths.STUDENT_RESOURCE)
-    @ExceptionHandler
-    public ResponseEntity<StudentResponse> getStudent(@PathVariable("id") String studentId){
+    public ResponseEntity<StudentResponse> getStudent(@PathVariable("id") long studentId){
         log.debug("getStudent hit with request studentId: {}", studentId);
-        if(studentId.contains("test-01")){
-            val student = StudentResponse.builder().firstName("Svanmon").email("svan@mon.ax").ssn("121294-193R").studentId(studentId).build();
+        if(studentId==1l){
+            val student = StudentResponse.builder().firstName("Svanmon").email("svan@mon.ax").ssn("121294-193R").studentId(""+studentId).build();
             return ResponseEntity.ok(student);
         }
 
