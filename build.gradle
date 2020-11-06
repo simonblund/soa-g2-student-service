@@ -8,6 +8,12 @@ repositories {
 }
 
 subprojects {
+    configurations {
+        [apiElements, runtimeElements].each {
+            it.outgoing.artifacts.removeIf { it.buildDependencies.getDependencies(null).contains(jar) }
+            it.outgoing.artifact(bootJar)
+        }
+    }
 
     group = 'com.g2.studentservice'
     version = '0.0.1-SNAPSHOT'
