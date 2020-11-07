@@ -58,6 +58,7 @@ USER spring:spring
 #RUN java -Djarmode=layertools -jar build/libs/*.jar extract
 
 # Run the process. This can be overriden if using DC to start the container.
-ENTRYPOINT ["./gradlew", "bootRun"]
+#ENTRYPOINT ["./gradlew", "bootRun"]
 #ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+CMD ["java", "-jar", "./service/build/libs/service-1.0.null.jar"]
 # This works.

@@ -1,3 +1,6 @@
+plugins {
+    id 'org.springframework.boot'
+}
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -15,6 +18,8 @@ dependencies {
     }
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+apply plugin: 'org.springframework.boot'
 bootJar {
     enabled = true
 }
