@@ -1,8 +1,6 @@
-plugins {
-    id 'org.springframework.boot'
-}
-dependencies {
+apply plugin: 'org.springframework.boot'
 
+dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -13,13 +11,13 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     api project(':api')
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-apply plugin: 'org.springframework.boot'
 bootJar {
     enabled = true
 }
