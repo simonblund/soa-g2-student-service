@@ -59,7 +59,7 @@ docker run --name gradle_builder --rm \
 
 
 echo "> Remove *.lock in Gradle persistent cache for next time running."
-rm -r "$project_dir"/build/docker_build_cache/modules-2/*.lock
+rm -r "$project_dir"/build/docker_build_cache/modules-2/*.lock 2> /dev/null
 
 
 echo "> Done!"
