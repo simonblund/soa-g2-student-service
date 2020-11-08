@@ -68,7 +68,10 @@ RUN chown -R spring:spring /home/spring
 
 # Copy in the compiled Jars.
 #COPY ./build/libs ./build/libs
-COPY --chown=spring:spring ./service/build/libs ./service/build/libs
+#COPY --chown=spring:spring ./service/build/libs ./service/build/libs
+## Note: This is OK with Spring as we always get one singe mega-jar... if the product of build was
+## multiple jars this may pose a problem.
+COPY --chown=spring:spring ./service/build/libs/*.jar ./app.jar
 #COPY --chown=spring:spring ./api/build/libs ./api/build/libs
 
 
@@ -91,5 +94,5 @@ USER spring:spring
 # Run the process. This can be overriden if using DC to start the container.
 #ENTRYPOINT ["./gradlew", ":service:bootRun"]
 #ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
-ENTRYPOINT ["java", "-jar", "./service/build/libs/service-1.0.null.jar"]
-# This works.
+#ENTRYPOINT ["java", "-jar", "./service/build/libs/service-1.0.null.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
