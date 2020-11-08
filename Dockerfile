@@ -22,10 +22,14 @@
 
 
 # === The execution ===
-FROM adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine
+FROM adoptopenjdk/openjdk11@sha256:18a90fe4c1b4140ce960294edb05c9ab5113fd4868a2c06b885c33db3bf99ab3
+#FROM adoptopenjdk/openjdk11:jre-11.0.9_11.1-alpine
 LABEL maintainer="weleoka@gitlab.com"
 WORKDIR /home/spring
 
+# Added for documentation purposes
+ENV SS_PORT 8080
+EXPOSE 8080
 
 # If using multi-stage dockerfile, then need the bootJar and dependencies.
 # Using the bash script or commandline for building and to enable local persistent Gradle cache then
@@ -68,7 +72,10 @@ RUN chown -R spring:spring /home/spring
 
 # Copy in the compiled Jars.
 #COPY ./build/libs ./build/libs
-COPY --chown=spring:spring ./service/build/libs ./service/build/libs
+#COPY --chown=spring:spring ./service/build/libs ./service/build/libs
+## Note: This is OK with Spring as we always get one singe mega-jar... if the product of build was
+## multiple jars this may pose a problem.
+COPY --chown=spring:spring ./service/build/libs/*.jar ./app.jar
 #COPY --chown=spring:spring ./api/build/libs ./api/build/libs
 
 
@@ -91,5 +98,5 @@ USER spring:spring
 # Run the process. This can be overriden if using DC to start the container.
 #ENTRYPOINT ["./gradlew", ":service:bootRun"]
 #ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
-ENTRYPOINT ["java", "-jar", "./service/build/libs/service-1.0.null.jar"]
-# This works.
+#ENTRYPOINT ["java", "-jar", "./service/build/libs/service-1.0.null.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
