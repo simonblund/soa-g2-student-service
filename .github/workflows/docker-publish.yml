@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build crap
-        run: sh ./docker_build.sh
+        run: /bin/bash -c "./docker_build.sh"
 
       - name: Build image
         run: docker build .
