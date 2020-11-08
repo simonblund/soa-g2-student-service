@@ -28,11 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
+      - name: Build crap
         run: sh ./docker_build.sh
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
