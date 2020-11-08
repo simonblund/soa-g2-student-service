@@ -39,7 +39,7 @@ echo "> (disabled) Removing build/application and build/classes folder to ensure
 
 echo "> Start the build process..."
 # Choose here if you want to do manual bash commands or the provided ones.
-docker run --name gradle_builder --rm -u gradle \
+docker run --name gradle_builder --rm \
 -v "$project_dir":/home/gradle \
 -v "$project_dir"/build/docker_build_cache:/home/gradle/.gradle/caches \
 -w /home/gradle \
