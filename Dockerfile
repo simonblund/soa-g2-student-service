@@ -75,7 +75,7 @@ RUN chown -R spring:spring /home/spring
 #COPY --chown=spring:spring ./service/build/libs ./service/build/libs
 ## Note: This is OK with Spring as we always get one singe mega-jar... if the product of build was
 ## multiple jars this may pose a problem.
-COPY --chown=spring:spring ./my_artifacts/*.jar ./app.jar
+COPY --chown=spring:spring ./build/my_artifacts/*.jar ./app.jar
 #COPY --chown=spring:spring ./api/build/libs ./api/build/libs
 
 

@@ -6,6 +6,7 @@
 
 
 # Allow certain files and directories
+!./build/my_artifacts
 !./service
 !./api
 !./build.gradle
