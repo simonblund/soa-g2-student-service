@@ -12,21 +12,28 @@ ARG GID=1000
 # Since the user and group 'gradle' exists we modify their GID and UID to match the host system's
 RUN groupmod -g $GID $UNAME
 RUN usermod -u $UID -g $GID $UNAME
+
+# Deliberately add cache dir before volume mounting or anything else can get there first.
+RUN mkdir /home/gradle/.gradle/caches
+
 RUN chown -R $UNAME:$UNAME /home/gradle
 
 # The problem now is that some things needed are owned by another UID
-# Solution 1: change the whole freakin filesystem permissions. (may as well run as root)
+# Solution 1: change the whole freakin filesystem permissions. (may as well run as root... not going to try this)
 #RUN find / -uid 800 -exec chown -v -h 900 '{}' \;
 #RUN find / -gid 700 -exec chgrp -v 600 '{}' \;
 # Solution 2: (seemed to have no effect)
 #ARG GRADLE_USER_HOME=/home/gradle
 # Solution 3:
 # add the -g /home/gradle flag to gradle command in build execution command in build_gradle.sh
+# Solution 4:
+# run the gradle build container as root user, and then deal with the permissions of created artifacts later.
 
 
 # Set active user
 USER $UNAME:$UNAME
 WORKDIR /home/gradle
+
 
 # Copy in entire project (of course this respects .dockerignore)
 COPY --chown=gradle:gradle ./ ./

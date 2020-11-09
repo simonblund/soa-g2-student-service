@@ -21,7 +21,7 @@ project_dir="`dirname "$script"`"
 # Gradle Build Image name
 gbi_name="my-gbi"
 # Gradle dependencies cache:
-gd_cache_dir="${project_dir}"/build/docker_build_cache
+gd_cache_dir="${project_dir}/build/my_gradle_cache"
 # Artifacts saved to host:
 artifacts_dir="${project_dir}/my_artifacts"
 # This is the problem... the Gradle process builds the Jar to an explicit dir depending on java module:
@@ -61,7 +61,7 @@ docker run --rm \
 -v "$gd_cache_dir":/home/gradle/.gradle/caches \
 -v "$artifacts_dir":"$container_artifacts_dir" \
 "$gbi_name" \
-/bin/bash -c "gradle -g /home/gradle --quiet --no-daemon build"
+/bin/bash -c "gradle --quiet --no-daemon build"
 # -v "$project_dir":/home/gradle \
 #/bin/bash -c "gradle --quiet --no-daemon bootJar"
 #/bin/bash
