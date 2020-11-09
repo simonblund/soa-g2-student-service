@@ -2,6 +2,7 @@ HELP.md
 .java
 .gradle
 build/
+my_artifacts/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
