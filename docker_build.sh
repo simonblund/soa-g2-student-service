@@ -75,8 +75,8 @@ docker run --rm \
 # todo: Q: the --no-daemon flag for gradle? Might be important for parallel running,
 #   as per: https://dev.to/markomannux/gradle-daemon-with-multi-module-spring-project-3nog
 
-echo "> Remove *.lock files in persistent build cache."
-rm -r "$project_dir"/build/docker_build_cache/modules-2/*.lock 2> /dev/null
+#echo "> Remove *.lock files in persistent build cache."
+#rm -r "$project_dir"/build/docker_build_cache/modules-2/*.lock 2> /dev/null
 
 
 echo "> Done!"
