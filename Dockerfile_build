@@ -14,9 +14,9 @@ RUN groupmod -g $GID $UNAME
 RUN usermod -u $UID -g $GID $UNAME
 
 # Deliberately add cache dir before volume mounting or anything else can get there first.
-RUN mkdir /home/gradle/.gradle/caches
-
-RUN chown -R $UNAME:$UNAME /home/gradle
+RUN mkdir /home/gradle/caches
+RUN mkdir /home/gradle/my_artifacts
+RUN chown -R $UID:$GID /home/gradle
 
 # The problem now is that some things needed are owned by another UID
 # Solution 1: change the whole freakin filesystem permissions. (may as well run as root... not going to try this)

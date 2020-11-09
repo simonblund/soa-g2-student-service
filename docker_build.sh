@@ -54,9 +54,10 @@ docker build \
 -t "$gbi_name" .
 
 echo "> Build artifacts in build container..."
-#docker run -it --name gradle_builder --rm -v $(pwd)/build/docker_build_cache:/home/gradle/.gradle/caches my-gbi:latest bash
+#docker run -it -u root --name gradle_builder --rm -v $(pwd)/build/my_gradle_cache:/home/gradle/caches -v $(pwd)/my_artifacts:/home/gradle/my_artifacts my-gbi:latest bash
 # similar to:
 docker run --rm \
+-u root \
 --name gradle_builder \
 -v "$gd_cache_dir":/home/gradle/caches \
 -v "$artifacts_dir":"$container_artifacts_dir" \
