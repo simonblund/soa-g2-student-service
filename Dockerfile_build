@@ -14,6 +14,13 @@ RUN groupmod -g $GID $UNAME
 RUN usermod -u $UID -g $GID $UNAME
 RUN chown -R $UNAME:$UNAME /home/gradle
 
+# The problem now is that some things needed are owned by another UID
+# Solution 1: change the whole freakin filesystem permissions. (may as well run as root)
+#RUN find / -uid 800 -exec chown -v -h 900 '{}' \;
+#RUN find / -gid 700 -exec chgrp -v 600 '{}' \;
+# Solution 2:
+ARG GRADLE_USER_HOME=/home/gradle
+
 # Set active user
 USER $UNAME:$UNAME
 WORKDIR /home/gradle
