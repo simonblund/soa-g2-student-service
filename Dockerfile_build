@@ -18,8 +18,11 @@ RUN chown -R $UNAME:$UNAME /home/gradle
 # Solution 1: change the whole freakin filesystem permissions. (may as well run as root)
 #RUN find / -uid 800 -exec chown -v -h 900 '{}' \;
 #RUN find / -gid 700 -exec chgrp -v 600 '{}' \;
-# Solution 2:
-ARG GRADLE_USER_HOME=/home/gradle
+# Solution 2: (seemed to have no effect)
+#ARG GRADLE_USER_HOME=/home/gradle
+# Solution 3:
+# add the -g /home/gradle flag to gradle command in build execution command in build_gradle.sh
+
 
 # Set active user
 USER $UNAME:$UNAME

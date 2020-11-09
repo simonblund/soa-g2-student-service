@@ -61,7 +61,7 @@ docker run --rm \
 -v "$gd_cache_dir":/home/gradle/.gradle/caches \
 -v "$artifacts_dir":"$container_artifacts_dir" \
 "$gbi_name" \
-/bin/bash -c "gradle --quiet --no-daemon build"
+/bin/bash -c "gradle -g /home/gradle --quiet --no-daemon build"
 # -v "$project_dir":/home/gradle \
 #/bin/bash -c "gradle --quiet --no-daemon bootJar"
 #/bin/bash
