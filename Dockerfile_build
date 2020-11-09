@@ -5,9 +5,16 @@ ARG UNAME=gradle
 ARG UID=1000
 ARG GID=1000
 
-# Since the user and group 'gradle' exists we modify their GID and UID to match the host system
+# We cant do this because the group may exist
+#RUN groupadd -g $GID -o $UNAME
+#RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+
+# Since the user and group 'gradle' exists we modify their GID and UID to match the host system's
+RUN groupmod -g $GID $UNAME
 RUN usermod -u $UID -g $GID $UNAME
 RUN chown -R $UNAME:$UNAME /home/gradle
+
+# Set active user
 USER $UNAME:$UNAME
 WORKDIR /home/gradle
 
