@@ -4,13 +4,14 @@
 # Ignore everything
 **
 
+
 # Allow certain files and directories
 !./service
 !./api
 !./build.gradle
 !./settings.gradle
-!./my_artifacts
-#!./docker_build_context
+!entrypoint.sh
+
 
 # Allow the extracted jar paths - DISABLED
 #!./build/dependencies!./build/snapshot-dependencies!./build/spring-boot-loader!./build/resources!./build/application

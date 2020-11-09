@@ -16,7 +16,7 @@ subprojects {
     }
 
     group = 'com.g2.studentservice'
-    String appVersion = '1.0'
+    String appVersion = '1.0.'
 
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'

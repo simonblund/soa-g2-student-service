@@ -23,7 +23,7 @@ gbi_name="my-gbi"
 # Gradle dependencies cache:
 gd_cache_dir="${project_dir}/build/my_gradle_cache"
 # Artifacts saved to host:
-artifacts_dir="${project_dir}/my_artifacts"
+artifacts_dir="${project_dir}/build/my_artifacts"
 # This is the problem... the Gradle process builds the Jar to an explicit dir depending on java module:
 container_artifacts_dir="/home/gradle/service/build/libs"
 
@@ -54,15 +54,17 @@ docker build \
 -t "$gbi_name" .
 
 echo "> Build artifacts in build container..."
-#docker run -it -u root --name gradle_builder --rm -v $(pwd)/build/my_gradle_cache:/home/gradle/caches -v $(pwd)/my_artifacts:/home/gradle/my_artifacts my-gbi:latest bash
+
+#docker run -it --name gradle_builder --rm -v $(pwd)/build/my_gradle_cache:/home/gradle/caches -v $(pwd)/build/my_artifacts:/home/gradle/service/build/libs my-gbi:latest bash
+#docker run -u root -it --name gradle_builder --rm -v $(pwd)/build/my_gradle_cache:/home/gradle/caches -v $(pwd)/build/my_artifacts:/home/gradle/service/build/libs my-gbi:latest bash
 # similar to:
 docker run --rm \
--u root \
 --name gradle_builder \
 -v "$gd_cache_dir":/home/gradle/caches \
 -v "$artifacts_dir":"$container_artifacts_dir" \
-"$gbi_name" \
-/bin/bash -c "gradle -g /home/gradle --quiet --no-daemon build"
+"$gbi_name"
+# This is now moved to the entrypoint.sh file.
+#/bin/bash -c "gradle -g /home/gradle --quiet --no-daemon build"
 # -v "$project_dir":/home/gradle \
 #/bin/bash -c "gradle --quiet --no-daemon bootJar"
 #/bin/bash

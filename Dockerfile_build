@@ -11,7 +11,7 @@ ARG GID=1000
 
 # Since the user and group 'gradle' exists we modify their GID and UID to match the host system's
 RUN groupmod -g $GID $UNAME
-RUN usermod -u $UID -g $GID $UNAME
+RUN usermod -o -u $UID -g $GID $UNAME
 
 # Deliberately add cache dir before volume mounting or anything else can get there first.
 RUN mkdir /home/gradle/caches
@@ -27,15 +27,20 @@ RUN chown -R $UID:$GID /home/gradle
 # Solution 3:
 # add the -g /home/gradle flag to gradle command in build execution command in build_gradle.sh
 # Solution 4:
-# run the gradle build container as root user, and then deal with the permissions of created artifacts later.
-
+# run the gradle process as root user (not good), and then deal with the permissions of created artifacts later.
+# Solution 5:
+# enter the container as root, then chown the relevant (or simply everything) volumes, before changing user
+# to the non-root user (the UID an GID of this non-root user is the same as that of the user running docker on host,
+# which was ensured during the build of this image) and then running the gradle build process. I think we have it.
 
 # Set active user
-USER $UNAME:$UNAME
+# We cant do this because the entrypoint.sh has to be run as root and then we change user to
+# the non-root user there before building the Gradle project.
+#USER $UNAME:$UNAME
 WORKDIR /home/gradle
-
 
 # Copy in entire project (of course this respects .dockerignore)
 COPY --chown=gradle:gradle ./ ./
+COPY ./entrypoint.sh ./entrypoint.sh
 
-#ENTRYPOINT ""
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]

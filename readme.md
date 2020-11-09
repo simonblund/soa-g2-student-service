@@ -27,3 +27,16 @@ calling the at the time imaginary student-begone-service that takes care of savi
 
 ## Persistance
 The student-service has a persistance layer consisting of the student-table in an RDS.
+
+# Docker and Gradle 
+The build script is used so that volumes can be mounted and map files between host and docker container. The reason for this is so that a separate build and runtime containers can be used. Now running gradle in a Docker container as a non-root user means that we can't write to the volumes mapped between host and container. Currently we have the options:
+1. simply have to accept that the gradle process is run as root in the build container. 
+2. start the container and as root run an entrypoint.sh. This scrip chown's the volumes to the non-root user and then starts the build as this same non-root user.
+
+There's more discussion about this online, one place is [here](https://github.com/moby/moby/issues/225).
+
+The sequence for getting a runnable docker image with the relevant artifact inside it is:
+1. Run `docker_build.sh`; then
+2. `docker build -t my_fat_tag .`
+3. Run it with: `docker run my_fat_tag:latest`.
+ 
