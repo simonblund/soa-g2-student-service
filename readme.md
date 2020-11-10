@@ -28,6 +28,7 @@ calling the at the time imaginary student-begone-service that takes care of savi
 ## Persistance
 The student-service has a persistance layer consisting of the student-table in an RDS.
 
+
 # Docker and Gradle 
 The build script is used so that volumes can be mounted and map files between host and docker container. The reason for this is so that a separate build and runtime containers can be used. Now running gradle in a Docker container as a non-root user means that we can't write to the volumes mapped between host and container. Currently we have the options:
 1. simply have to accept that the gradle process is run as root in the build container. 
@@ -40,3 +41,6 @@ The sequence for getting a runnable docker image with the relevant artifact insi
 2. `docker build -t my_fat_tag .`
 3. Run it with: `docker run my_fat_tag:latest`.
  
+ 
+ # Todo
+ In GitHub Actions implement a caching system for dependencies. [Read more here](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#caching-dependencies).

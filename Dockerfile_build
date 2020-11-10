@@ -44,3 +44,4 @@ COPY --chown=gradle:gradle ./ ./
 COPY ./entrypoint.sh ./entrypoint.sh
 
 ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
+#CMD ["gradle -g /home/gradle build"] # see note in entrypoint.sh if using this.
