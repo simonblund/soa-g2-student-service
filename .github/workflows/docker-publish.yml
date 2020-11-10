@@ -31,6 +31,10 @@ jobs:
       - name: Set Environment variables
         env:
           IMAGE_NAME=student-service
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Change all uppercase to lowercase
+          
 
       - name: Build Gradle project
         run: ./docker_build.sh
@@ -43,11 +47,6 @@ jobs:
 
       - name: Naming, versioning and pushing image
         run: |
-        IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}
-
-          # Change all uppercase to lowercase
-           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 
