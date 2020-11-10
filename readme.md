@@ -41,6 +41,16 @@ The sequence for getting a runnable docker image with the relevant artifact insi
 2. `docker build -t my_fat_tag .`
 3. Run it with: `docker run my_fat_tag:latest`.
  
+
+# Github Actions
+A few different workflows are used in this project. One of them is the building and pushing of a container image to the GitHub container Registry. To then use the image you have to use a PAT, meaning: 
+
+1 This is not very granular as PAT has scope but cannot segregate repositories. You give one, you give all;
+2 access is only by HTTPS, no SSH allowed.
+
+A workaround is to create a dummy, or machine, github user - and use this to host your packages and keep your actual private repos safe from malicious entities in possession of your PAT. 
  
- # Todo
- In GitHub Actions implement a caching system for dependencies. [Read more here](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#caching-dependencies).
+https://docs.github.com/en/free-pro-team@latest/packages/managing-container-images-with-github-container-registry/pushing-and-pulling-docker-images#authenticating-to-github-container-registry
+https://docs.github.com/en/free-pro-team@latest/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#authenticating-with-a-personal-access-token
+
+TODO: In GitHub Actions implement a caching system for dependencies. [Read more here](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#caching-dependencies), and [also here](https://github.com/docker/build-push-action#leverage-github-cache).
