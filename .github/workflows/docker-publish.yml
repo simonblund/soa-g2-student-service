@@ -31,8 +31,7 @@ jobs:
       - name: Set Environment variables
         env:
           IMAGE_NAME=student-service
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME} | tr '[A-Z]' '[a-z]'
           # Change all uppercase to lowercase
           
 
