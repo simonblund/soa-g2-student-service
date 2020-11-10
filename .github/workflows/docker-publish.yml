@@ -32,7 +32,7 @@ jobs:
         env:
           IMAGE_NAME: student-service
           IMAGE_ID: docker.pkg.github.com/${{ github.repository }}/${{env.IMAGE_NAME}}
-          VERSION: ${{ github.ref | sed -e 's,.*/\(.*\),\1,')}}
+          VERSION: ${{ github.ref | sed -e 's,.*/\(.*\),\1,'}}
 
       - name: Build Gradle project
         run: ./docker_build.sh
