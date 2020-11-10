@@ -32,6 +32,7 @@ jobs:
         env:
           IMAGE_NAME: student-service
           IMAGE_ID: docker.pkg.github.com/${{ github.repository }}/${{env.IMAGE_NAME}}
+          VERSION: ${{ github.ref | sed -e 's,.*/\(.*\),\1,')}}
 
       - name: Build Gradle project
         run: ./docker_build.sh
@@ -44,10 +45,7 @@ jobs:
 
       - name: Naming, versioning and pushing image
         run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          [ "$VERSION" == "master" ] && VERSION=latest
           echo IMAGE_ID=${{env.IMAGE_ID}}
-          echo VERSION=${VERSION}
-          docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_ID}}:${VERSION}
+          echo VERSION=${{env.VERSION}}
+          docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_ID}}:${{env.VERSION}}
           docker push ${{env.IMAGE_ID}}:${VERSION}
