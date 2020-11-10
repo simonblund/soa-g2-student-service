@@ -1,8 +1,8 @@
 # Please add a short description of the workflow
 #
 #
-name: Build and push Docker images
-uses: docker/build-push-action@v2.1.0
+name: Build and push Docker images PROPOSAL
+
 on:
   push:
     branches: master
