@@ -1,5 +1,4 @@
 name: Docker
-
 on:
   push:
     # Publish `master` as Docker `latest` image.
@@ -27,8 +26,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set Environment variables
         env: |
           IMAGE_NAME=student-service
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME} | tr '[A-Z]' '[a-z]'
