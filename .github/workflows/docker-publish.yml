@@ -15,6 +15,8 @@ on:
 env:
   # TODO: Change variable to your image's name.
   IMAGE_NAME: student-service
+  IMAGE_ID: docker.pkg.github.com/${{ github.repository }}/${{env.IMAGE_NAME}}
+  VERSION: ${{ github.run_number }}
 
 jobs:
   # Push image to GitHub Packages.
@@ -26,14 +28,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        
-      - name: Set some envs
-        run: echo "ENV me" 
-        env:
-          IMAGE_NAME: student-service
-          IMAGE_ID: docker.pkg.github.com/${{ github.repository }}/${{env.IMAGE_NAME}}
-          VERSION: ${{ github.ref }}
-
+      
       - name: Build Gradle project
         run: ./docker_build.sh
 
@@ -48,4 +43,4 @@ jobs:
           echo IMAGE_ID=${{env.IMAGE_ID}}
           echo VERSION=${{env.VERSION}}
           docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_ID}}:${{env.VERSION}}
-          docker push ${{env.IMAGE_ID}}:${VERSION}
+          docker push ${{env.IMAGE_ID}}:${{env.VERSION}}
