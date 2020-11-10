@@ -31,7 +31,7 @@ jobs:
         run: echo "ENV me" 
         env:
           IMAGE_NAME=student-service
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME} | tr '[A-Z]' '[a-z]'
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}
 
       - name: Build Gradle project
         run: ./docker_build.sh
