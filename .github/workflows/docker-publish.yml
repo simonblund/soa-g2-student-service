@@ -40,7 +40,10 @@ jobs:
 
       - name: Naming, versioning and pushing image
         run: |
+          echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
           echo IMAGE_ID=${{env.IMAGE_ID}}
           echo VERSION=${{env.VERSION}}
           docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_ID}}:${{env.VERSION}}
           docker push ${{env.IMAGE_ID}}:${{env.VERSION}}
+          docker build . --tag ghcr.io/simonblund/${{ github.repository }}:$GITHUB_SHA
+          docker push ghcr.io/simonblund/${{ github.repository }}:$GITHUB_SHA
