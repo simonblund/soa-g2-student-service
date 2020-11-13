@@ -35,9 +35,11 @@ jobs:
       - name: Build Docker image
         run: docker build . -t student-service
 
+      - name: Login to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        
       - name: Naming, versioning and pushing image
         run: |
-          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           echo IMAGE_ID=${{env.IMAGE_ID}}
           echo VERSION=${{env.VERSION}}
           docker tag 'student-service':'latest' ${{env.IMAGE_ID}}:${{env.VERSION}}
