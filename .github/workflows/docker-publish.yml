@@ -14,7 +14,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: student-service
+  IMAGE_NAME: soa-g2-student-service
   IMAGE_ID: gchr.io/${{ github.repository }}
   VERSION: ${{ github.run_number }}
 
@@ -42,6 +42,6 @@ jobs:
         run: |
           echo IMAGE_ID=${{env.IMAGE_ID}}
           echo VERSION=${{env.VERSION}}
-          docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_ID}}:${{env.VERSION}}
+          docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_NAME}}:${{env.VERSION}}
           docker push ${{env.IMAGE_ID}}:${{env.VERSION}}
          
