@@ -42,6 +42,6 @@ jobs:
         run: |
           echo IMAGE_ID=${{env.IMAGE_ID}}
           echo VERSION=${{env.VERSION}}
-          docker tag ${{env.IMAGE_NAME}} ${{env.IMAGE_NAME}}:${{env.VERSION}}
+          docker tag ${{env.IMAGE_ID}}:${{env.VERSION}}
           docker push ${{env.IMAGE_ID}}:${{env.VERSION}}
          
