@@ -1,9 +1,6 @@
 package com.g2.studentservice.interfaces.rest;
 
-import com.g2.studentservice.api.rest.CreateStudentRequest;
-import com.g2.studentservice.api.rest.StudentResource;
-import com.g2.studentservice.api.rest.StudentResponse;
-import com.g2.studentservice.api.rest.UrlPaths;
+import com.g2.studentservice.api.rest.*;
 import com.g2.studentservice.application.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-public class StudentController implements StudentResource {
+public class StudentController {
 
     private final StudentService service;
 
-    @Override
+
     @GetMapping(UrlPaths.STUDENT_GET)
     public ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") long studentId) {
         try {
@@ -40,7 +37,23 @@ public class StudentController implements StudentResource {
 
     }
 
-    @Override
+    @PostMapping(UrlPaths.SSN_FROM_STUDENTUSER)
+    public ResponseEntity<SsnAndStudentUserResponse> getSsnFromStudentUser(@RequestBody SsnFromStudentUserRequest request) {
+        try {
+            log.debug("getStudent hit with request studentId: {}", request.getStudentUser());
+            val student = service.getStudentItsSsn(request.getStudentUser());
+
+            return ResponseEntity.ok(SsnAndStudentUserResponse.builder().ssn(student.getPnr()).studentUser(student.getStudentUser()).build());
+
+
+        } catch (Exception e) {
+            log.warn("Get student from studentId failed: {}", e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
     @PostMapping(UrlPaths.STUDENT_CREATE)
     public ResponseEntity<StudentResponse> createStudent(@RequestBody CreateStudentRequest request){
         try{
