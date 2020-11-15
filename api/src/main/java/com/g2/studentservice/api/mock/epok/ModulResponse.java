@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ModulResponse {
-    private String kod;
+    private String code;
     private String description;
     private ModulStatus status;
 }

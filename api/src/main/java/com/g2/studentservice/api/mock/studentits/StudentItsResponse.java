@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentItsResponse {
-    private String pnr;
+    private String ssn;
 
     @JsonAlias("username")
     private String studentUser;

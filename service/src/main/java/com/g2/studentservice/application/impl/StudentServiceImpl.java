@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentItsResponse getStudentItsSsn(String studentUser){
         val students = client.getAllStudents();
-        students.forEach(it -> {log.warn("studentuser "+it.getStudentUser()+" person "+it.getPnr());});
+        students.forEach(it -> {log.warn("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
         val student = students.stream().filter(it -> it.getStudentUser().equals(studentUser)).findFirst();
         return student.get();
     }

@@ -43,7 +43,7 @@ public class StudentController {
             log.debug("getStudent hit with request studentId: {}", request.getStudentUser());
             val student = service.getStudentItsSsn(request.getStudentUser());
 
-            return ResponseEntity.ok(SsnAndStudentUserResponse.builder().ssn(student.getPnr()).studentUser(student.getStudentUser()).build());
+            return ResponseEntity.ok(SsnAndStudentUserResponse.builder().ssn(student.getSsn()).studentUser(student.getStudentUser()).build());
 
 
         } catch (Exception e) {
