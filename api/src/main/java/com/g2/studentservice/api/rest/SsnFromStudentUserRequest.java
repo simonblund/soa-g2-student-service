@@ -1,5 +1,6 @@
 package com.g2.studentservice.api.rest;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -12,11 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class StudentResponse {
-
-    private long studentId;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SsnFromStudentUserRequest {
     private String studentUser;
-    private String firstName;
-    private String email;
-    private String ssn;
 }
