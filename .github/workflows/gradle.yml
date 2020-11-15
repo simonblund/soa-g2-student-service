@@ -23,6 +23,6 @@ jobs:
     - name: Publish artefacts to Github Package Repository
       run: ./gradlew publish
       env:
-        USERNAME: ${{ secrets.MVN_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.MVN_PASSWORD }}
+        MVN_USERNAME: ${{ secrets.MVN_USERNAME }}
+        MVN_PASSWORD: ${{ secrets.MVN_PASSWORD }}
         RUN_NUMBER: ${{github.RUN_NUMBER}}
