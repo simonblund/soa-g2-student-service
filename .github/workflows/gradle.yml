@@ -23,6 +23,6 @@ jobs:
     - name: Publish artefacts to Github Package Repository
       run: ./gradlew publish
       env:
-        USERNAME: simonblund
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ secrets.MVN_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.MVN_PASSWORD }}
         RUN_NUMBER: ${{github.RUN_NUMBER}}
