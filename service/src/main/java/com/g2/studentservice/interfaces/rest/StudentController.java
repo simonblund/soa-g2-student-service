@@ -41,7 +41,23 @@ public class StudentController {
     public ResponseEntity<SsnAndStudentUserResponse> getSsnFromStudentUser(@RequestBody SsnFromStudentUserRequest request) {
         try {
             log.debug("getStudent hit with request studentId: {}", request.getStudentUser());
-            val student = service.getStudentItsSsn(request.getStudentUser());
+            val student = service.getStudent(request.getStudentUser());
+
+            return ResponseEntity.ok(SsnAndStudentUserResponse.builder().ssn(student.getSsn()).studentUser(student.getStudentUser()).build());
+
+
+        } catch (Exception e) {
+            log.warn("Get student from studentId failed: {}", e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @PostMapping(UrlPaths.STUDENTUSER_FROM_SSN)
+    public ResponseEntity<SsnAndStudentUserResponse> getStudentUserFromSsn(@RequestBody StudentUserFromSsnRequest request) {
+        try {
+            log.debug("getStudent hit with request studentUser: {}", request.getSsn());
+            val student = service.getStudentFromSsn(request.getSsn());
 
             return ResponseEntity.ok(SsnAndStudentUserResponse.builder().ssn(student.getSsn()).studentUser(student.getStudentUser()).build());
 
