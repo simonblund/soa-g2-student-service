@@ -56,11 +56,26 @@ public class StudentServiceImpl implements StudentService {
         return students;
     }
 
+
     @Override
-    public StudentItsResponse getStudentItsSsn(String studentUser){
+    public StudentEntity getStudent(String studentUser){
         val students = client.getAllStudents();
-        students.forEach(it -> {log.warn("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
-        val student = students.stream().filter(it -> it.getStudentUser().equals(studentUser)).findFirst();
-        return student.get();
+        students.forEach(it -> {log.info("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
+        val studentIts = students.stream().filter(it -> it.getStudentUser().equals(studentUser)).findFirst().get();
+
+        val student = StudentEntity.builder().ssn(studentIts.getSsn()).studentUser(studentIts.getStudentUser()).build();
+
+        return student;
+    }
+
+    @Override
+    public StudentEntity getStudentFromSsn(String ssn){
+        val students = client.getAllStudents();
+        students.forEach(it -> {log.info("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
+        val studentIts = students.stream().filter(it -> it.getSsn().equals(ssn)).findFirst().get();
+
+        val student = StudentEntity.builder().ssn(studentIts.getSsn()).studentUser(studentIts.getStudentUser()).build();
+
+        return student;
     }
 }

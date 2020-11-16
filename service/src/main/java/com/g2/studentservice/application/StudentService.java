@@ -12,5 +12,7 @@ public interface StudentService {
 
     List<StudentItsResponse> getAllStudents();
 
-    StudentItsResponse getStudentItsSsn(String studentUser);
+    StudentEntity getStudent(String studentUser);
+
+    StudentEntity getStudentFromSsn(String ssn);
 }
