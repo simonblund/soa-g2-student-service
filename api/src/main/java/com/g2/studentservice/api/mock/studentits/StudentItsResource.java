@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface StudentItsResource {
 
-    @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.EPOKMODUL)
+    @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.STUDENTITS)
     ResponseEntity<List<StudentItsResponse>> getAllStudents();
 }
