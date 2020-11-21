@@ -1,4 +1,4 @@
-package com.g2.studentservice.api.mock.canvas;
+package com.g2.studentservice.api.mock.ladok;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
