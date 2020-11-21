@@ -1,10 +1,7 @@
 package com.g2.studentservice.api.rest;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 public interface StudentResource {
     @RequestMapping(method = RequestMethod.GET, path = UrlPaths.STUDENT_GET)
@@ -15,4 +12,7 @@ public interface StudentResource {
 
     @RequestMapping(method = RequestMethod.POST, path = UrlPaths.STUDENT_CREATE)
     ResponseEntity<StudentResponse> createStudent(@RequestBody CreateStudentRequest request);
+
+    @PostMapping(UrlPaths.STUDENTUSER_FROM_SSN)
+    ResponseEntity<SsnAndStudentUserResponse> getStudentUserFromSsn(@RequestBody StudentUserFromSsnRequest request);
 }
