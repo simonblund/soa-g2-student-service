@@ -13,4 +13,7 @@ public interface LadokResource {
 
     @RequestMapping(method = RequestMethod.PATCH, path = MockUrlPaths.LADOK+"/{id}")
     ResponseEntity<ResultResponse> setResult(@PathVariable String id, @RequestBody ResultResponse body);
+
+    @RequestMapping(method = RequestMethod.POST, path = MockUrlPaths.LADOK)
+    ResponseEntity<ResultResponse> newResult(@RequestBody ResultResponse body);
 }
