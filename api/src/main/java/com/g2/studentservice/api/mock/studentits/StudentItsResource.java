@@ -3,6 +3,7 @@ package com.g2.studentservice.api.mock.studentits;
 import com.g2.studentservice.api.mock.MockUrlPaths;
 import com.g2.studentservice.api.mock.epok.ModulResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,6 +14,5 @@ public interface StudentItsResource {
     @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.STUDENTITS)
     ResponseEntity<List<StudentItsResponse>> getAllStudents();
 
-    @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.STUDENTITS+"?username={studentUser}")
-    ResponseEntity<List<StudentItsResponse>> getStudentFromStudentUser(String studentUser);
+
 }

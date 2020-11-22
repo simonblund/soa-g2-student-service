@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-public class StudentController {
+public class StudentController implements StudentResource{
 
     private final StudentService service;
 
 
     @GetMapping(UrlPaths.STUDENT_GET)
-    public ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") String studentId) {
+    public ResponseEntity<StudentResponse> getStudent(@PathVariable String studentId) {
         try {
             log.debug("getStudent hit with request studentId: {}", studentId);
             val student = service.findStudentByStudentUser(studentId);
@@ -26,6 +26,7 @@ public class StudentController {
                     .studentId(student.getStudentId())
                     .ssn(student.getSsn())
                     .firstName(student.getFirstname())
+                    .lastname(student.getLastname())
                     .email(student.getEmailAddress())
                     .studentUser(student.getStudentUser()).build());
 
