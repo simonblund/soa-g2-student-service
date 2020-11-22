@@ -13,5 +13,5 @@ public interface EpokModulResource {
     ResponseEntity<List<ModulResponse>> getAll();
 
     @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.EPOKMODUL+"?code={module}")
-    ResponseEntity<ModulResponse> getOne(@PathVariable String module);
+    ResponseEntity<List<ModulResponse>> getOne(@PathVariable String module);
 }
