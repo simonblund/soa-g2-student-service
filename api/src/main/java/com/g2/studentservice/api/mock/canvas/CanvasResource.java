@@ -14,4 +14,7 @@ public interface CanvasResource {
 
     @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.CANVAS+"{id}")
     ResponseEntity<AssignmentResponse> getAssignment(String id);
+
+    @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.CANVAS+"?module_id={moduleCode}")
+    ResponseEntity<List<AssignmentResponse>> getAssignmentsForExamination(String moduleCode);
 }
