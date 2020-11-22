@@ -18,4 +18,5 @@ public class ModulResponse {
     private String code;
     private String description;
     private ModulStatus status;
+    private String courseCode;
 }
