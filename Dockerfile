@@ -28,8 +28,8 @@ LABEL maintainer="weleoka@gitlab.com"
 WORKDIR /home/spring
 
 # Added for documentation purposes
-ENV SS_PORT 8080
-EXPOSE 8080
+ENV SS_PORT 8083
+EXPOSE 8083
 
 # If using multi-stage dockerfile, then need the bootJar and dependencies.
 # Using the bash script or commandline for building and to enable local persistent Gradle cache then
