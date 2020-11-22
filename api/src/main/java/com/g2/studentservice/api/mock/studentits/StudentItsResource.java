@@ -12,4 +12,7 @@ public interface StudentItsResource {
 
     @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.STUDENTITS)
     ResponseEntity<List<StudentItsResponse>> getAllStudents();
+
+    @RequestMapping(method = RequestMethod.GET, path = MockUrlPaths.STUDENTITS+"?username={studentUser}")
+    ResponseEntity<List<StudentItsResponse>> getStudentFromStudentUser(String studentUser);
 }

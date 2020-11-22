@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 public interface StudentResource {
     @RequestMapping(method = RequestMethod.GET, path = UrlPaths.STUDENT_GET)
-    ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") long studentId);
+    ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") String studentId);
+
 
     @RequestMapping(method = RequestMethod.POST, path = UrlPaths.SSN_FROM_STUDENTUSER)
     ResponseEntity<SsnAndStudentUserResponse> getSsnFromStudentUser(@RequestBody SsnFromStudentUserRequest request);

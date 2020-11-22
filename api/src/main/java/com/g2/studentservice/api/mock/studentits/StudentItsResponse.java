@@ -20,4 +20,7 @@ public class StudentItsResponse {
 
     @JsonAlias("username")
     private String studentUser;
+
+    private String firstName;
+    private String lastName;
 }

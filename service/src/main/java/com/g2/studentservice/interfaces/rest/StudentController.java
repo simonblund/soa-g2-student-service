@@ -17,10 +17,10 @@ public class StudentController {
 
 
     @GetMapping(UrlPaths.STUDENT_GET)
-    public ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") long studentId) {
+    public ResponseEntity<StudentResponse> getStudent(@PathVariable("studentId") String studentId) {
         try {
             log.debug("getStudent hit with request studentId: {}", studentId);
-            val student = service.findStudentById(studentId);
+            val student = service.findStudentByStudentUser(studentId);
 
             return ResponseEntity.ok(StudentResponse.builder()
                     .studentId(student.getStudentId())

@@ -31,6 +31,19 @@ public class StudentServiceImpl implements StudentService {
         return repository.findById(studentId).get();
     }
 
+
+    @Override
+    public StudentEntity findStudentByStudentUser(String studentUser) {
+        val student = client.getStudentFromStudentUser(studentUser).getBody().get(0);
+
+        return StudentEntity.builder()
+                .firstname(student.getFirstName())
+                .lastname(student.getLastName())
+                .studentUser(student.getStudentUser())
+                .ssn(student.getSsn())
+                .build();
+    }
+
     @Override
     public StudentEntity create(CreateStudentRequest request){
         String studentUser = studentUserGenerator(request.getFirstname(), request.getLastname());
@@ -52,14 +65,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentItsResponse> getAllStudents(){
-        val students = client.getAllStudents();
+        val students = client.getAllStudents().getBody();
         return students;
     }
 
 
     @Override
     public StudentEntity getStudent(String studentUser){
-        val students = client.getAllStudents();
+        val students = client.getAllStudents().getBody();
         students.forEach(it -> {log.info("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
         val studentIts = students.stream().filter(it -> it.getStudentUser().equals(studentUser)).findFirst().get();
 
@@ -70,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentEntity getStudentFromSsn(String ssn){
-        val students = client.getAllStudents();
+        val students = client.getAllStudents().getBody();
         students.forEach(it -> {log.info("studentuser "+it.getStudentUser()+" person "+it.getSsn());});
         val studentIts = students.stream().filter(it -> it.getSsn().equals(ssn)).findFirst().get();
 

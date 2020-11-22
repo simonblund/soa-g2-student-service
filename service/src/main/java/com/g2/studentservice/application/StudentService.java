@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface StudentService {
     StudentEntity findStudentById(long studentId);
+
+    StudentEntity findStudentByStudentUser(String studentUser);
+
     StudentEntity create(CreateStudentRequest student);
 
     List<StudentItsResponse> getAllStudents();
