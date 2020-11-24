@@ -1,6 +1,17 @@
 url: localhost:8083
 server:
   port: 8083
+    
+# Logging to stdout for development. Note: empty strings are significant.
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /dev
+      suffix:
+      prefix: stdout
+      buffered: false
+      file-date-format:
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
